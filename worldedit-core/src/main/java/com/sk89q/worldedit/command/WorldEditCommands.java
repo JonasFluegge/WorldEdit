@@ -39,6 +39,7 @@ import com.sk89q.worldedit.util.formatting.text.TextComponent;
 import com.sk89q.worldedit.util.formatting.text.TranslatableComponent;
 import com.sk89q.worldedit.util.formatting.text.format.TextColor;
 import com.sk89q.worldedit.util.paste.ActorCallbackPaste;
+import com.sk89q.worldedit.util.paste.PasteMetadata;
 import com.sk89q.worldedit.util.report.ConfigReport;
 import com.sk89q.worldedit.util.report.ReportList;
 import com.sk89q.worldedit.util.report.SystemInfoReport;
@@ -135,7 +136,10 @@ public class WorldEditCommands {
 
         if (pastebin) {
             actor.checkPermission("worldedit.report.pastebin");
-            ActorCallbackPaste.pastebin(we.getSupervisor(), actor, result, TranslatableComponent.builder("worldedit.report.callback"));
+            PasteMetadata metadata = new PasteMetadata();
+            metadata.author = actor.getName();
+            metadata.extension = "report";
+            ActorCallbackPaste.pastebin(we.getSupervisor(), actor, result, metadata, TranslatableComponent.builder("worldedit.report.callback"));
         }
     }
 
